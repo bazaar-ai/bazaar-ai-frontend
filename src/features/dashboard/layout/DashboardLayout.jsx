@@ -48,7 +48,7 @@ export function DashboardLayout() {
         <div className="dash-layout">
             <Topbar user={user} onNavigate={handleNavigate} onLogout={handleLogout} />
             <div className="dash-layout__body">
-                <Sidebar activePage={activePage} onNavigate={handleNavigate} />
+                <Sidebar activePage={activePage} onNavigate={handleNavigate} onLogout={handleLogout} />
                 <main className="dash-layout__content">
                     <Outlet context={{ user, onNavigate: handleNavigate }} />
                 </main>

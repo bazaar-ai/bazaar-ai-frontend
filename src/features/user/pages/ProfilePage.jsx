@@ -7,6 +7,20 @@ import { validateName, validatePhone, toE164AzPhone } from "../../../shared/util
 import { toProfilePhotoSrc, getInitials } from "../../../shared/utils/profilePhoto";
 import "./ProfilePage.css";
 
+const STATUS_META = {
+    ACTIVE: { label: "Active", tone: "eligible" },
+    PENDING: { label: "Pending", tone: "pending" },
+    SUSPENDED: { label: "Suspended", tone: "rejected" },
+    BLOCKED: { label: "Blocked", tone: "rejected" },
+};
+
+function formatDate(value) {
+    if (!value) return "—";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "—";
+    return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+}
+
 export function ProfilePage() {
     const context = useOutletContext();
     const { user: userFromLayout } = context || {};
@@ -16,6 +30,10 @@ export function ProfilePage() {
 
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
+    const [address, setAddress] = useState("");
+    const [dateOfBirth, setDateOfBirth] = useState("");
     const [errors, setErrors] = useState({});
     const [saveError, setSaveError] = useState(null);
     const [saveSuccess, setSaveSuccess] = useState(false);
@@ -30,6 +48,10 @@ export function ProfilePage() {
         if (user) {
             setName(user.name ?? "");
             setPhone(user.phone ?? "");
+            setCity(user.city ?? "");
+            setCountry(user.country ?? "");
+            setAddress(user.address ?? "");
+            setDateOfBirth(user.dateOfBirth ?? "");
         }
     }, [user]);
     /* eslint-enable react-hooks/set-state-in-effect */
@@ -52,6 +74,10 @@ export function ProfilePage() {
             await update({
                 name: name.trim(),
                 phone: toE164AzPhone(digitsOnly),
+                city: city.trim() || null,
+                country: country.trim() || null,
+                address: address.trim() || null,
+                dateOfBirth: dateOfBirth || null,
             });
             setSaveSuccess(true);
         } catch (err) {
@@ -98,7 +124,7 @@ export function ProfilePage() {
 
     const roleLabel = user?.userRole ? ROLE_META[user.userRole]?.label : null;
     const avatar = toProfilePhotoSrc(user?.profilePhoto);
-    const kycStatus = user?.kycStatus ?? "pending";
+    const statusMeta = STATUS_META[user?.userStatus] ?? { label: user?.userStatus ?? "—", tone: "pending" };
 
     return (
         <div className="profile-page">
@@ -153,11 +179,23 @@ export function ProfilePage() {
                         <span className="profile-status-value">{roleLabel ?? "—"}</span>
                     </div>
                     <div className="profile-status-row">
-                        <span className="profile-status-label">KYC status</span>
-                        <span className={`pill pill--${kycStatus === "approved" ? "eligible" : kycStatus === "rejected" ? "rejected" : "pending"}`}>
+                        <span className="profile-status-label">Status</span>
+                        <span className={`pill pill--${statusMeta.tone}`}>
               <span className="pill__dot" />
-                            {kycStatus === "approved" ? "Approved" : kycStatus === "rejected" ? "Rejected" : "Pending"}
+                            {statusMeta.label}
             </span>
+                    </div>
+                </section>
+
+                <section className="profile-card">
+                    <div className="profile-card__title">Account info</div>
+                    <div className="profile-status-row">
+                        <span className="profile-status-label">Member since</span>
+                        <span className="profile-status-value">{formatDate(user?.createdAt)}</span>
+                    </div>
+                    <div className="profile-status-row">
+                        <span className="profile-status-label">Last updated</span>
+                        <span className="profile-status-value">{formatDate(user?.updatedAt)}</span>
                     </div>
                 </section>
 
@@ -201,6 +239,40 @@ export function ProfilePage() {
                             containerClassName="field--spaced"
                             autoComplete="tel-national"
                             inputMode="numeric"
+                        />
+
+                        <div className="profile-field-row">
+                            <TextField
+                                label="City"
+                                value={city}
+                                onChange={(event) => setCity(event.target.value)}
+                                containerClassName="field--spaced"
+                                autoComplete="address-level2"
+                            />
+                            <TextField
+                                label="Country"
+                                value={country}
+                                onChange={(event) => setCountry(event.target.value)}
+                                containerClassName="field--spaced"
+                                autoComplete="country-name"
+                            />
+                        </div>
+
+                        <TextField
+                            label="Address"
+                            value={address}
+                            onChange={(event) => setAddress(event.target.value)}
+                            containerClassName="field--spaced"
+                            autoComplete="street-address"
+                        />
+
+                        <TextField
+                            label="Date of birth"
+                            type="date"
+                            value={dateOfBirth}
+                            onChange={(event) => setDateOfBirth(event.target.value)}
+                            containerClassName="field--spaced"
+                            autoComplete="bday"
                         />
 
                         <Button type="submit" loading={saving}>
