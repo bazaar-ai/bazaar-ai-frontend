@@ -50,7 +50,9 @@ export function DashboardLayout() {
             <div className="dash-layout__body">
                 <Sidebar activePage={activePage} onNavigate={handleNavigate} onLogout={handleLogout} />
                 <main className="dash-layout__content">
-                    <Outlet context={{ user, onNavigate: handleNavigate }} />
+                    <div className="dash-layout__content-inner">
+                        <Outlet context={{ user, onNavigate: handleNavigate }} />
+                    </div>
                 </main>
             </div>
         </div>

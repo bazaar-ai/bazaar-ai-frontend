@@ -1,6 +1,5 @@
 .overview {
     padding: var(--space-2) var(--space-2) var(--space-6);
-    max-width: 1180px;
 }
 
 .overview__header {

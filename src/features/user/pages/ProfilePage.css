@@ -1,6 +1,5 @@
 .profile-page {
     padding: var(--space-2) var(--space-2) var(--space-6);
-    max-width: 980px;
 }
 
 .profile-page__loading {
