@@ -1,0 +1,23 @@
+.dash-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-layout__body {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.dash-layout__content {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-6) var(--space-8) var(--space-10);
+}
+
+@media (max-width: 768px) {
+    .dash-layout__content {
+        padding: var(--space-4) var(--space-4) var(--space-8);
+    }
+}

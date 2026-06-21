@@ -1,0 +1,215 @@
+@import "./tokens.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--accent-solid);
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+a:hover {
+  opacity: 0.75;
+}
+
+button {
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--violet-100);
+  color: var(--ink-900);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}
+
+/* ===== Animated gradient-mesh backdrop =====
+   Three soft, slowly-drifting color blobs behind a blurred canvas.
+   Used as a fixed full-viewport layer behind glass surfaces. */
+.mesh-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg-canvas);
+}
+
+.mesh-backdrop::before,
+.mesh-backdrop::after,
+.mesh-backdrop .mesh-blob {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.mesh-backdrop::before {
+  width: 52vw;
+  height: 52vw;
+  top: -18vw;
+  left: -12vw;
+  background: var(--bg-mesh-1);
+  animation: mesh-drift-a 26s ease-in-out infinite alternate;
+}
+
+.mesh-backdrop::after {
+  width: 46vw;
+  height: 46vw;
+  bottom: -16vw;
+  right: -10vw;
+  background: var(--bg-mesh-2);
+  animation: mesh-drift-b 30s ease-in-out infinite alternate;
+}
+
+.mesh-backdrop .mesh-blob {
+  width: 38vw;
+  height: 38vw;
+  top: 32vh;
+  left: 38vw;
+  background: var(--bg-mesh-3);
+  animation: mesh-drift-c 22s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-drift-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(4vw, 5vw) scale(1.08);
+  }
+}
+
+@keyframes mesh-drift-b {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-5vw, -4vw) scale(1.1);
+  }
+}
+
+@keyframes mesh-drift-c {
+  from {
+    transform: translate(-3vw, 2vw) scale(1);
+  }
+  to {
+    transform: translate(3vw, -3vw) scale(1.06);
+  }
+}
+
+/* ===== Motion utilities ===== */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.animate-rise {
+  animation: rise-in var(--duration-slow) var(--ease-standard) both;
+}
+
+.animate-fade {
+  animation: fade-in var(--duration-slow) var(--ease-standard) both;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(17, 20, 43, 0.06) 25%,
+    rgba(17, 20, 43, 0.11) 37%,
+    rgba(17, 20, 43, 0.06) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .mesh-backdrop::before,
+  .mesh-backdrop::after,
+  .mesh-backdrop .mesh-blob {
+    animation: none !important;
+  }
+}

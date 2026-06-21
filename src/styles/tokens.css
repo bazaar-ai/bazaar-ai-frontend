@@ -1,0 +1,96 @@
+:root {
+  /* ===== Core palette ===== */
+  --ink-900: #11142b;
+  --ink-700: #2c3050;
+  --ink-500: #5b5f80;
+  --ink-300: #9296b3;
+  --ink-100: #e7e8f2;
+
+  --violet-600: #6d5bf2;
+  --violet-500: #7c6ff0;
+  --violet-400: #9b8ff5;
+  --violet-100: #ece9fe;
+
+  --cyan-500: #4fc7d6;
+  --cyan-400: #5fd9c4;
+  --cyan-100: #e1fbf4;
+
+  --sky-500: #5b9ff5;
+  --sky-100: #e8f1ff;
+
+  --coral-500: #ff8a65;
+  --amber-500: #f0a93f;
+  --amber-100: #fdf1dd;
+  --green-500: #34b27a;
+  --green-100: #e3f7ec;
+  --red-500: #ef5a5a;
+  --red-100: #fdeaea;
+
+  /* ===== Surfaces ===== */
+  --bg-canvas: #f3f4fb;
+  --bg-mesh-1: #c9c2fb;
+  --bg-mesh-2: #bfe3fb;
+  --bg-mesh-3: #c6f3e6;
+
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-strong: rgba(255, 255, 255, 0.82);
+  --glass-bg-soft: rgba(255, 255, 255, 0.42);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-border-soft: rgba(17, 20, 43, 0.07);
+
+  --surface-solid: #ffffff;
+
+  /* ===== Text ===== */
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-500);
+  --text-tertiary: var(--ink-300);
+  --text-on-accent: #ffffff;
+
+  /* ===== Accent gradient ===== */
+  --accent-gradient: linear-gradient(135deg, #7c6ff0 0%, #5b9ff5 55%, #5fd9c4 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #6d5bf2 0%, #4f8de8 55%, #4fc7d6 100%);
+  --accent-gradient-soft: linear-gradient(135deg, rgba(124, 111, 240, 0.14) 0%, rgba(91, 159, 245, 0.14) 55%, rgba(95, 217, 196, 0.14) 100%);
+  --accent-solid: #6d5bf2;
+
+  /* ===== Type ===== */
+  --font-display: "Space Grotesk", "Inter", -apple-system, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+
+  /* ===== Space ===== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ===== Radius ===== */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* ===== Shadow / glow ===== */
+  --shadow-glass: 0 1px 1px rgba(17, 20, 43, 0.03), 0 16px 40px -16px rgba(44, 30, 120, 0.18);
+  --shadow-glass-hover: 0 1px 1px rgba(17, 20, 43, 0.04), 0 24px 56px -16px rgba(44, 30, 120, 0.26);
+  --shadow-accent-glow: 0 8px 28px -6px rgba(109, 91, 242, 0.45);
+  --shadow-focus: 0 0 0 4px rgba(124, 111, 240, 0.22);
+
+  /* ===== Motion ===== */
+  --ease-standard: cubic-bezier(0.22, 0.85, 0.32, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 420ms;
+}
