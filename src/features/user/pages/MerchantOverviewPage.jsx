@@ -1,29 +1,42 @@
+import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { useInvoices } from "../../invoices/hooks/useInvoices";
+import { UploadModal } from "../../invoices/pages/InvoicesPage";
 import "./MerchantOverviewPage.css";
 
-const RECENT_INVOICES = [
-    { id: "INV-089", buyer: "Azersu LLC", amount: "₼ 22,000", status: "eligible" },
-    { id: "INV-088", buyer: "Delta Trade", amount: "₼ 15,500", status: "funded" },
-    { id: "INV-087", buyer: "Khazar Ltd", amount: "₼ 9,000", status: "pending" },
-    { id: "INV-086", buyer: "Silk Road Co", amount: "₼ 34,200", status: "rejected" },
-];
-
 const STATUS_META = {
-    eligible: { label: "Eligible", cls: "pill--eligible" },
-    funded:   { label: "Funded",   cls: "pill--funded"   },
-    pending:  { label: "Pending",  cls: "pill--pending"  },
-    rejected: { label: "Rejected", cls: "pill--rejected" },
-    draft:    { label: "Draft",    cls: "pill--draft"    },
-    settled:  { label: "Settled",  cls: "pill--settled"  },
+    ELIGIBLE: { label: "Eligible", cls: "pill--eligible" },
+    FUNDED:   { label: "Funded",   cls: "pill--funded"   },
+    PENDING:  { label: "Pending",  cls: "pill--pending"  },
+    REJECTED: { label: "Rejected", cls: "pill--rejected" },
+    DRAFT:    { label: "Draft",    cls: "pill--draft"    },
+    SETTLED:  { label: "Settled",  cls: "pill--settled"  },
 };
+
+function formatAmount(amount) {
+    if (amount == null) return "—";
+    return `₼ ${Number(amount).toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    })}`;
+}
 
 export function MerchantOverviewPage() {
     const { user, onNavigate } = useOutletContext();
+    const [showUpload, setShowUpload] = useState(false);
+
+    const { invoices, totalElements, loading, refetch } = useInvoices(4);
+
     const today = new Date().toLocaleDateString("en-GB", {
         day: "numeric", month: "long", year: "numeric",
     });
 
     const firstName = user?.name?.split(" ")[0] ?? "Merchant";
+
+    const handleUploadSuccess = () => {
+        setShowUpload(false);
+        refetch();
+    };
 
     return (
         <div className="overview">
@@ -32,7 +45,7 @@ export function MerchantOverviewPage() {
                     <div className="overview__title">Welcome, {firstName} 👋</div>
                     <div className="overview__sub">Today: {today}</div>
                 </div>
-                <button className="mer-btn mer-btn--primary" onClick={() => onNavigate("upload")}>
+                <button className="mer-btn mer-btn--primary" onClick={() => setShowUpload(true)}>
                     ⬆️ Upload Invoice
                 </button>
             </div>
@@ -40,7 +53,7 @@ export function MerchantOverviewPage() {
             <div className="overview__metrics">
                 <div className="metric-card animate-rise" style={{ animationDelay: "40ms" }}>
                     <div className="metric-card__label">Total Invoices</div>
-                    <div className="metric-card__value">24</div>
+                    <div className="metric-card__value">{loading ? "—" : totalElements}</div>
                     <div className="metric-card__trend metric-card__trend--up">↑ 3 added this month</div>
                 </div>
                 <div className="metric-card animate-rise" style={{ animationDelay: "90ms" }}>
@@ -78,22 +91,42 @@ export function MerchantOverviewPage() {
                         </tr>
                         </thead>
                         <tbody>
-                        {RECENT_INVOICES.map((inv) => {
-                            const meta = STATUS_META[inv.status];
-                            return (
-                                <tr key={inv.id}>
-                                    <td><strong>{inv.id}</strong></td>
-                                    <td>{inv.buyer}</td>
-                                    <td>{inv.amount}</td>
-                                    <td>
-                      <span className={`pill ${meta.cls}`}>
-                        <span className="pill__dot" />
-                          {meta.label}
-                      </span>
-                                    </td>
+                        {loading ? (
+                            Array.from({ length: 4 }).map((_, i) => (
+                                <tr key={i} className="overview-skel-row">
+                                    <td><div className="overview-skel overview-skel--code" /></td>
+                                    <td><div className="overview-skel overview-skel--buyer" /></td>
+                                    <td><div className="overview-skel overview-skel--amount" /></td>
+                                    <td><div className="overview-skel overview-skel--pill" /></td>
                                 </tr>
-                            );
-                        })}
+                            ))
+                        ) : invoices.length === 0 ? (
+                            <tr>
+                                <td colSpan={4} className="overview-empty-cell">
+                                    No invoices yet —{" "}
+                                    <button className="overview-empty-link" onClick={() => setShowUpload(true)}>
+                                        upload your first one
+                                    </button>
+                                </td>
+                            </tr>
+                        ) : (
+                            invoices.map((inv) => {
+                                const meta = STATUS_META[inv.invoiceStatus?.toUpperCase()] ?? { label: inv.invoiceStatus, cls: "pill--draft" };
+                                return (
+                                    <tr key={inv.id}>
+                                        <td><strong>{inv.invoiceCode}</strong></td>
+                                        <td>{inv.buyer}</td>
+                                        <td>{formatAmount(inv.amount)}</td>
+                                        <td>
+                                                <span className={`pill ${meta.cls}`}>
+                                                    <span className="pill__dot" />
+                                                    {meta.label}
+                                                </span>
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                        )}
                         </tbody>
                     </table>
                 </div>
@@ -172,6 +205,13 @@ export function MerchantOverviewPage() {
                     </div>
                 ))}
             </div>
+
+            {showUpload && (
+                <UploadModal
+                    onClose={() => setShowUpload(false)}
+                    onSuccess={handleUploadSuccess}
+                />
+            )}
         </div>
     );
 }

@@ -42,7 +42,7 @@
     position: relative;
     overflow: hidden;
     transition: transform var(--duration-base) var(--ease-standard),
-        box-shadow var(--duration-base) var(--ease-standard);
+    box-shadow var(--duration-base) var(--ease-standard);
 }
 
 .metric-card::before {
@@ -422,3 +422,54 @@
         gap: var(--space-3);
     }
 }
+
+/* ─── Overview skeleton rows ─── */
+.overview-skel-row td {
+    padding: 14px var(--space-5);
+}
+
+.overview-skel {
+    border-radius: var(--radius-sm);
+    background: linear-gradient(
+            90deg,
+            var(--ink-100) 25%,
+            rgba(231, 232, 242, 0.4) 50%,
+            var(--ink-100) 75%
+    );
+    background-size: 200% 100%;
+    animation: overview-shimmer 1.5s infinite;
+    height: 13px;
+}
+
+@keyframes overview-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.overview-skel--code   { width: 64px; }
+.overview-skel--buyer  { width: 110px; }
+.overview-skel--amount { width: 76px; }
+.overview-skel--pill   { width: 66px; height: 20px; border-radius: var(--radius-full); }
+
+/* ─── Overview empty invoice cell ─── */
+.overview-empty-cell {
+    padding: var(--space-6) var(--space-5);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    text-align: center;
+}
+
+.overview-empty-link {
+    background: none;
+    border: none;
+    color: var(--accent-solid);
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.overview-empty-link:hover { opacity: 0.75; }

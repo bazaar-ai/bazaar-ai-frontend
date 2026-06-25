@@ -6,8 +6,7 @@ const NAV = [
         section: "Main",
         items: [
             { id: "dashboard", icon: "🏠", label: "Dashboard" },
-            { id: "invoices", icon: "📄", label: "My Invoices", badge: "24" },
-            { id: "upload", icon: "⬆️", label: "Upload Invoice" },
+            { id: "invoices", icon: "📄", label: "My Invoices" },
         ],
     },
     {

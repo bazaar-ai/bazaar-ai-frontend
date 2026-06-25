@@ -9,6 +9,7 @@ import { DashboardLayout } from "../features/dashboard/layout/DashboardLayout";
 import { MerchantOverviewPage } from "../features/user/pages/MerchantOverviewPage";
 import { ProfilePage } from "../features/user/pages/ProfilePage";
 import { ComingSoonPage } from "../features/user/pages/ComingSoonPage.jsx";
+import { InvoicesPage } from "../features/invoices/pages/InvoicesPage.jsx";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useAuth } from "../shared/context/AuthContext";
 
@@ -54,15 +55,7 @@ export function AppRoutes() {
             >
                 <Route index element={<MerchantOverviewPage />} />
                 <Route path="profile" element={<ProfilePage />} />
-                <Route
-                    path="invoices"
-                    element={
-                        <ComingSoonPage
-                            title="My Invoices"
-                            description="Your full invoice list is on its way. Check back soon."
-                        />
-                    }
-                />
+                <Route path="invoices" element={<InvoicesPage />} />
                 <Route
                     path="upload"
                     element={
