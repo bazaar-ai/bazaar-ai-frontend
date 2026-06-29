@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./MarketplacePage.css";
+import "./MarketPlacePage.css";
 
 /* ─── Mock data ─── */
 const MOCK_REQUESTS = [

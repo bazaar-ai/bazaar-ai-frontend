@@ -13,6 +13,7 @@ import { InvoicesPage } from "../features/invoices/pages/InvoicesPage.jsx";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useAuth } from "../shared/context/AuthContext";
 import { MarketplacePage } from "../features/user/pages/MarketPlacePage.jsx";
+import { WalletPage } from "../features/user/pages/WalletPage.jsx";
 
 function RegistrationFlow() {
     return (
@@ -67,15 +68,7 @@ export function AppRoutes() {
                     }
                 />
                 <Route path="marketplace" element={<MarketplacePage />} />
-                <Route
-                    path="wallet"
-                    element={
-                        <ComingSoonPage
-                            title="Wallet"
-                            description="Your wallet and transaction history will live here."
-                        />
-                    }
-                />
+                <Route path="wallet" element={<WalletPage/>} />
                 <Route
                     path="dna"
                     element={
