@@ -14,6 +14,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { useAuth } from "../shared/context/AuthContext";
 import { WalletPage } from "../features/user/pages/WalletPage.jsx";
 import { MarketplacePage } from "../features/user/pages/MarketPlacePage.jsx";
+import { TradeDNAPage } from "../features/user/pages/TradeDnaPage.jsx";
 
 function RegistrationFlow() {
     return (
@@ -72,10 +73,7 @@ export function AppRoutes() {
                 <Route
                     path="dna"
                     element={
-                        <ComingSoonPage
-                            title="Trade DNA"
-                            description="A detailed breakdown of your Trade DNA score is coming soon."
-                        />
+                        <TradeDNAPage/>
                     }
                 />
                 <Route
