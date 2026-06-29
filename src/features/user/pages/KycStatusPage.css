@@ -1,0 +1,256 @@
+/* ===== Page layout ===== */
+.kyc-page {
+    padding: var(--space-2) var(--space-2) var(--space-6);
+}
+
+.kyc-page__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+}
+
+.kyc-page__title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+}
+
+.kyc-page__badge {
+    font-size: var(--text-sm);
+    padding: 4px 12px;
+}
+
+/* ===== Grid ===== */
+.kyc-page__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    align-items: start;
+}
+
+@media (max-width: 760px) {
+    .kyc-page__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Card ===== */
+.kyc-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid var(--glass-border-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-glass);
+}
+
+.kyc-card__title {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-5);
+}
+
+/* ===== Steps ===== */
+.kyc-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+}
+
+.kyc-step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    position: relative;
+    padding-bottom: var(--space-4);
+}
+
+.kyc-step:last-child {
+    padding-bottom: 0;
+}
+
+.kyc-step__icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    color: var(--green-500);
+    position: relative;
+    z-index: 1;
+}
+
+.kyc-step__check-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.kyc-step__line {
+    position: absolute;
+    left: 13px;
+    top: 28px;
+    bottom: 0;
+    width: 2px;
+    background: var(--green-100);
+    z-index: 0;
+}
+
+.kyc-step__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 3px;
+}
+
+.kyc-step__label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.kyc-step__date {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+}
+
+/* ===== Complete banner ===== */
+.kyc-complete-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    background: var(--green-100);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+    color: #2d6b4a;
+    font-weight: 500;
+}
+
+.kyc-complete-banner .kyc-step__check-svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: #2d6b4a;
+}
+
+/* ===== Documents ===== */
+.kyc-docs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+}
+
+.kyc-doc {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--glass-border-soft);
+    border-radius: var(--radius-sm);
+}
+
+.kyc-doc__icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-bg-soft);
+    border-radius: 8px;
+    border: 1px solid var(--glass-border-soft);
+}
+
+.kyc-doc__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.kyc-doc__name {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.kyc-doc__meta {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+}
+
+.kyc-doc__status {
+    flex-shrink: 0;
+    font-size: var(--text-xs);
+}
+
+/* ===== Update button ===== */
+.kyc-update-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: transparent;
+    border: 1px solid var(--glass-border-soft);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kyc-update-btn:hover:not(:disabled) {
+    background: rgba(17, 20, 43, 0.04);
+    box-shadow: var(--shadow-glass);
+}
+
+.kyc-update-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.kyc-update-btn__icon {
+    font-size: 0.85rem;
+}
+
+/* ===== Pill (re-used from global) ===== */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.pill__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.pill--eligible { background: var(--green-100); color: #2d6b4a; }
+.pill--eligible .pill__dot { background: #2d6b4a; }
+
+.pill--pending { background: var(--amber-100); color: #8a5a14; }
+.pill--pending .pill__dot { background: #8a5a14; }
+
+.pill--rejected { background: var(--red-100); color: #a3392f; }
+.pill--rejected .pill__dot { background: #a3392f; }

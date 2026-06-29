@@ -15,6 +15,7 @@ import { useAuth } from "../shared/context/AuthContext";
 import { WalletPage } from "../features/user/pages/WalletPage.jsx";
 import { MarketplacePage } from "../features/user/pages/MarketPlacePage.jsx";
 import { TradeDNAPage } from "../features/user/pages/TradeDnaPage.jsx";
+import { KycStatusPage } from "../features/user/pages/KycStatusPage.jsx";
 
 function RegistrationFlow() {
     return (
@@ -76,15 +77,7 @@ export function AppRoutes() {
                         <TradeDNAPage/>
                     }
                 />
-                <Route
-                    path="kyc"
-                    element={
-                        <ComingSoonPage
-                            title="KYC Status"
-                            description="Track your verification status here soon."
-                        />
-                    }
-                />
+                <Route path="kyc" element={<KycStatusPage />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
