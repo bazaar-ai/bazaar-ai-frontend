@@ -12,6 +12,7 @@ import { ComingSoonPage } from "../features/user/pages/ComingSoonPage.jsx";
 import { InvoicesPage } from "../features/invoices/pages/InvoicesPage.jsx";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useAuth } from "../shared/context/AuthContext";
+import { MarketplacePage } from "../features/user/pages/MarketPlacePage.jsx";
 
 function RegistrationFlow() {
     return (
@@ -65,15 +66,7 @@ export function AppRoutes() {
                         />
                     }
                 />
-                <Route
-                    path="marketplace"
-                    element={
-                        <ComingSoonPage
-                            title="Marketplace"
-                            description="Browse investment opportunities here soon."
-                        />
-                    }
-                />
+                <Route path="marketplace" element={<MarketplacePage />} />
                 <Route
                     path="wallet"
                     element={

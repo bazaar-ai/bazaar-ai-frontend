@@ -1,0 +1,203 @@
+/* ─── Page shell ─── */
+.mkt-page {
+    padding: var(--space-2) var(--space-2) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.mkt-page__title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.mkt-page__sub {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin: var(--space-1) 0 0;
+}
+
+/* ─── Tabs ─── */
+.mkt-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--glass-border-soft);
+}
+
+.mkt-tab {
+    background: none;
+    border: none;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard);
+}
+
+.mkt-tab:hover {
+    color: var(--text-primary);
+}
+
+.mkt-tab--active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+}
+
+/* ─── Stats strip ─── */
+.mkt-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+}
+
+.mkt-stat {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--glass-border-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    box-shadow: var(--shadow-glass);
+}
+
+.mkt-stat__label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+}
+
+.mkt-stat__value {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+/* ─── Request card ─── */
+.mkt-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid var(--glass-border-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-glass);
+    transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.mkt-card:hover {
+    box-shadow: var(--shadow-glass-hover);
+}
+
+.mkt-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+}
+
+.mkt-card__id {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.mkt-card__meta {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    margin-top: var(--space-1);
+}
+
+.mkt-card__cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.mkt-card__col-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-1);
+}
+
+.mkt-card__col-value {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.mkt-card__col-value--blue {
+    color: #285a9e;
+}
+
+.mkt-card__col-value--green {
+    color: #2d6b4a;
+}
+
+/* ─── Progress bar ─── */
+.mkt-progress {
+    height: 6px;
+    background: var(--glass-border-soft);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-3);
+}
+
+.mkt-progress__fill {
+    height: 100%;
+    background: #2d6b4a;
+    border-radius: var(--radius-full);
+    transition: width 0.4s var(--ease-standard);
+}
+
+.mkt-card__footer {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+}
+
+/* ─── Empty state ─── */
+.mkt-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    gap: var(--space-2);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 760px) {
+    .mkt-page {
+        padding: var(--space-4);
+    }
+
+    .mkt-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .mkt-card__cols {
+        grid-template-columns: 1fr 1fr;
+    }
+}

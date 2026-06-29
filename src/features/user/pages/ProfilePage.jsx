@@ -280,6 +280,70 @@ export function ProfilePage() {
                         </Button>
                     </form>
                 </section>
+                <section className="profile-card profile-card--wide">
+                    <div className="profile-card__title">Company Information</div>
+
+                    <div className="profile-field-row">
+                        <div className="field field--spaced">
+                            <label className="field__label">Company Name</label>
+                            <input
+                                className="field__input"
+                                type="text"
+                                defaultValue="Your Company LLC"
+                                placeholder="Company name"
+                            />
+                        </div>
+                        <div className="field field--spaced">
+                            <label className="field__label">Tax ID</label>
+                            <input
+                                className="field__input"
+                                type="text"
+                                defaultValue="1234567890"
+                                placeholder="Tax ID"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="field field--spaced">
+                        <label className="field__label">Field of Activity</label>
+                        <select className="field__input field__select">
+                            <option>Trade</option>
+                            <option>Agriculture</option>
+                            <option>Manufacturing</option>
+                            <option>Services</option>
+                        </select>
+                    </div>
+
+                    <hr className="profile-divider" />
+
+                    <div className="profile-card__title" style={{ marginTop: "var(--space-4)" }}>
+                        Notification Settings
+                    </div>
+
+                    <div className="profile-notify-list">
+                        {[
+                            { id: "notif-kyc", label: "KYC status changes", defaultChecked: true },
+                            { id: "notif-invoice", label: "Invoice updates", defaultChecked: true },
+                            { id: "notif-wallet", label: "Wallet transactions", defaultChecked: true },
+                            { id: "notif-whatsapp", label: "WhatsApp notifications", defaultChecked: false },
+                        ].map(({ id, label, defaultChecked }) => (
+                            <label key={id} className="profile-notify-item">
+                                <input
+                                    type="checkbox"
+                                    id={id}
+                                    defaultChecked={defaultChecked}
+                                    className="profile-notify-checkbox"
+                                />
+                                <span className="profile-notify-label">{label}</span>
+                            </label>
+                        ))}
+                    </div>
+                    <div style={{ marginTop: "var(--space-5)" }}>
+                    <Button type="button">
+                        Save changes
+                    </Button>
+                </div>
+                </section>
             </div>
         </div>
     );
