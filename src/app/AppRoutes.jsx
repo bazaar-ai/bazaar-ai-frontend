@@ -12,8 +12,8 @@ import { ComingSoonPage } from "../features/user/pages/ComingSoonPage.jsx";
 import { InvoicesPage } from "../features/invoices/pages/InvoicesPage.jsx";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useAuth } from "../shared/context/AuthContext";
-import { MarketplacePage } from "../features/user/pages/MarketPlacePage.jsx";
 import { WalletPage } from "../features/user/pages/WalletPage.jsx";
+import { MarketplacePage } from "../features/user/pages/MarketPlacePage.jsx";
 
 function RegistrationFlow() {
     return (
